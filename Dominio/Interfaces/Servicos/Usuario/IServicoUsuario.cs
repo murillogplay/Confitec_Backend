@@ -9,6 +9,8 @@ namespace Dominio.Interfaces.Servicos.Usuario
         UsuarioResponse Adicionar(UsuarioRequest request);
         UsuarioResponse Alterar(UsuarioRequest request);
         UsuarioResponse Selecionar(int id);
-        IEnumerable<UsuarioResponse> Listar(); 
+        IEnumerable<UsuarioResponse> Listar();  
+        void Remover(int id);
+
     }
 }

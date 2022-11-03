@@ -19,7 +19,7 @@ namespace API.Usuario.Controllers.Usuario
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(UsuarioResponse), (int)HttpStatusCode.OK)] 
+        [ProducesResponseType(typeof(UsuarioResponse), (int)HttpStatusCode.OK)]
         public IActionResult Adicionar(UsuarioRequest request)
         {
             try
@@ -32,7 +32,7 @@ namespace API.Usuario.Controllers.Usuario
                 return ResponseException(e);
             }
         }
-         
+
         [HttpPut]
         [ProducesResponseType(typeof(UsuarioResponse), (int)HttpStatusCode.OK)]
         public IActionResult Alterar(UsuarioRequest request)
@@ -46,7 +46,7 @@ namespace API.Usuario.Controllers.Usuario
             {
                 return ResponseException(e);
             }
-        } 
+        }
 
         [HttpGet("listar")]
         [ProducesResponseType(typeof(UsuarioResponse), (int)HttpStatusCode.OK)]
@@ -71,6 +71,20 @@ namespace API.Usuario.Controllers.Usuario
             {
                 var result = _servico.Selecionar(id);
                 return Response(result, _servico);
+            }
+            catch (Exception e)
+            {
+                return ResponseException(e);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remover(int id)
+        {
+            try
+            {
+                _servico.Remover(id);
+                return Response(_servico);
             }
             catch (Exception e)
             {

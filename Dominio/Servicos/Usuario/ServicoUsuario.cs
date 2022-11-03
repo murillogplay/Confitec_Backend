@@ -53,7 +53,21 @@ namespace Dominio.Servicos.Usuario
             return _mapper.Map<UsuarioResponse>(_repositorioUsuario.Editar(usuario));
         }
 
-        public IEnumerable<UsuarioResponse> Listar() => _mapper.Map<IEnumerable<UsuarioResponse>>(_repositorioUsuario.Listar().ToList()); 
+        public IEnumerable<UsuarioResponse> Listar() => _mapper.Map<IEnumerable<UsuarioResponse>>(_repositorioUsuario.Listar().ToList());
+
+        public void Remover(int id)
+        {
+            var usuario = _repositorioUsuario.ObterPorId(id);
+
+            if (usuario == null)
+            {
+                AddNotification("Excluir Usuario", Mensagens.DADOS_NAO_ECONTRADOS);
+                return;
+            }
+             
+            _repositorioUsuario.Remover(usuario);
+        }
+
         public UsuarioResponse Selecionar(int id) => _mapper.Map<UsuarioResponse>(_repositorioUsuario.ObterPorId(id));
     }
 }
